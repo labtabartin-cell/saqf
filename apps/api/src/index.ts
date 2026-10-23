@@ -1,0 +1,11 @@
+import express from "express";
+import cors from "cors";
+import multer from "multer";
+const app=express();
+const upload=multer({dest:"uploads/"});
+app.use(cors()); app.use(express.json()); app.use("/uploads",express.static("uploads"));
+app.get("/health",(_,res)=>res.json({ok:true,name:"saqf-api"}));
+app.get("/api/categories",(_,res)=>res.json(["کالا","خدمات","املاک","خودرو","مد و زیبایی","دیجیتال","آموزش","سرگرمی"]));
+app.post("/api/ads",(req,res)=>res.status(201).json({id:crypto.randomUUID(),...req.body}));
+app.post("/api/upload",upload.array("images",10),(req,res)=>res.json({files:(req.files as Express.Multer.File[]).map(f=>({name:f.originalname,url:`/uploads/${f.filename}`}))}));
+app.listen(process.env.PORT||4000,()=>console.log("Saqf API running"));
