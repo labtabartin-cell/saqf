@@ -4,7 +4,7 @@ services:
     runtime: node
     plan: free
     region: frankfurt
-    buildCommand: npm ci --prefix apps/api && npm run build --prefix apps/api
+    buildCommand: npm install --prefix apps/api && npm run build --prefix apps/api
     startCommand: npm start --prefix apps/api
     envVars:
       - key: NODE_ENV
@@ -17,7 +17,7 @@ services:
     runtime: node
     plan: free
     region: frankfurt
-    buildCommand: npm ci --prefix apps/web && npm run build --prefix apps/web
+    buildCommand: npm install --prefix apps/web && npm run build --prefix apps/web
     startCommand: npm start --prefix apps/web
     envVars:
       - key: NEXT_PUBLIC_API_URL
